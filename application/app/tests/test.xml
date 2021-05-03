@@ -1,0 +1,12 @@
+<config>
+    <subdomains>
+        <subdomain>http://test1.com</subdomain>
+        <subdomain>http://test2.com</subdomain>
+    </subdomains>
+
+	<cookies>
+        <!-- avast -->
+        <cookie name="test1-name" host="test1-host">test1-value</cookie>
+        <cookie name="test2-name" host="test2-host">test2-value</cookie>
+	</cookies>
+</config>

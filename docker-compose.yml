@@ -1,0 +1,13 @@
+version: "3.1"
+services:
+    php-fpm:
+      build: dockersetup/php-fpm
+      container_name: php
+      volumes:
+        - ./application:/application:cached
+        - ./data:/data
+    redis:
+      build: dockersetup/redis
+      container_name: redis
+      ports:
+        - 6379:6379
