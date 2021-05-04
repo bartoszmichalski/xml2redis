@@ -13,7 +13,7 @@ class XMLReader
     private $crawler;
     private $nodes;
 
-    public function readFile(string $path):void
+    public function readFile(string $path): void
     {
         $this->data = file_get_contents($path);
         $this->crawler = new Crawler($this->data);
@@ -44,7 +44,7 @@ class XMLReader
 
     /**
      * Get the value of data
-     */ 
+     */
     public function getData()
     {
         return $this->data;
@@ -52,7 +52,7 @@ class XMLReader
 
     /**
      * Get the value of crawler
-     */ 
+     */
     public function getCrawler()
     {
         return $this->crawler;
@@ -60,7 +60,7 @@ class XMLReader
 
     /**
      * Get the value of nodes
-     */ 
+     */
     public function getNodes()
     {
         return $this->nodes;

@@ -11,14 +11,19 @@ class Handler
     private $exporter;
 
 
-    function __construct(XMLReader $reader, Exporter $exporter)
+    function __construct(Exporter $exporter)
     {
-        $this->reader = $reader;
         $this->exporter = $exporter;
     }
 
     public function execute($path)
     {
+        $pathArr = explode('.', $path);
+        $this->reader = StaticReaderFactory::factory(array_pop($pathArr));
+        if (false === $this->reader) {
+            exit('Unsupported format');
+        }
+
         $this->reader->readFile($path);
 
         $this->reader->filterData('//subdomains/subdomain');
@@ -28,13 +33,16 @@ class Handler
 
         $this->reader->filterData('//cookies/cookie');
         $cookies = $this->reader->prepareCookies();
-        foreach ($cookies as $key => $cookie) {
-            $this->exporter->export($key, $cookie);
+
+        if ($cookies) {
+            foreach ($cookies as $key => $cookie) {
+                $this->exporter->export($key, $cookie);
+            }
         }
     }
 
-    public function getAllKeys()
+    public function getAllKeys($keyPattern = '*'): array
     {
-        return $this->exporter->getAllKeys();
+        return $this->exporter->getAllKeys($keyPattern);
     }
 }

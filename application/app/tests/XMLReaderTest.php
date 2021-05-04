@@ -6,7 +6,8 @@ use PHPUnit\Framework\TestCase;
 use App\Service\XMLReader;
 
 
-class XMLReaderTest extends TestCase {
+class XMLReaderTest extends TestCase
+{
 
     /**
      * @dataProvider filepathProvider
@@ -18,13 +19,13 @@ class XMLReaderTest extends TestCase {
 
         $this->assertIsString($reader->getData());
         $this->assertIsObject($reader->getCrawler());
-    
     }
 
     /**
      * @dataProvider filepathProvider
      */
-    public function testFilterData($path){
+    public function testFilterData($path)
+    {
         $reader = new XMLReader();
         $reader->readfile($path);
         $reader->filterData("//subdomains/subdomain");
@@ -35,12 +36,13 @@ class XMLReaderTest extends TestCase {
     /**
      * @dataProvider filepathProvider
      */
-    public function testGetSubdomains($path){
+    public function testGetSubdomains($path)
+    {
         $reader = new XMLReader();
         $reader->readfile($path);
         $reader->filterData("//subdomains/subdomain");
 
-        $expSubdomains = [ 
+        $expSubdomains = [
             'http://test1.com',
             'http://test2.com',
         ];
@@ -49,12 +51,13 @@ class XMLReaderTest extends TestCase {
     /**
      * @dataProvider filepathProvider
      */
-    public function testGetCookies($path){
+    public function testGetCookies($path)
+    {
         $reader = new XMLReader();
         $reader->readfile($path);
         $reader->filterData("//cookies/cookie");
 
-        $expCookies = [ 
+        $expCookies = [
             'cookie:test1-name:test1-host' => 'test1-value',
             'cookie:test2-name:test2-host' => 'test2-value',
         ];
